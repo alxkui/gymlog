@@ -8,37 +8,46 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.exercise-border {
+  border-color: #3a3a3a;
+}
+
 input {
-  background-color: #313f4a;
+  background-color: #232323;
   color: white;
   font-size: 1rem;
+  border-color: #232323;
 }
 
 input[type="number"] {
-  width: 45px;
+  width: 70px;
 }
 
 input[type="text"] {
-  width: 120px;
+  width: 150px;
 }
 
 body {
-  background-color: #1e272e;
+  background-color: #161616;
   color: white;
 }
 
 .bottom-prompt {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  top: 0;
+  right: 0;
   background: #313f4a;
   display: flex;
   justify-content: space-between;
-  padding: 1rem 3rem;
 }
 
 .btn {
   color: white;
   font-weight: bolder;
+  padding: 2em;
+  background-color: rgb(10, 30, 10);
+}
+
+.btn.cancel {
+  background-color: rgb(56, 13, 0);
 }

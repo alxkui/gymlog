@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Editable from "./Editable";
 import { supabase } from '../../lib/supabaseClient';
+import { FcCheckmark, FcCancel } from 'react-icons/fc'
 
 export default function Exercise({ defaultExerciseName, defaultMax, defaultReps, defaultSets, id }: any) {
 
@@ -55,7 +56,7 @@ export default function Exercise({ defaultExerciseName, defaultMax, defaultReps,
             <div
                 onFocus={handleFocusOnExercise}
                 onBlur={handleCancel}
-                className="relative border-solid border-2 rounded-md py-2 px-1 my-5 w-full flex content-between justify-between">
+                className="exercise-border relative border-solid border-2 rounded-md py-2 px-1 my-5 w-full flex content-between justify-between">
 
                 <div id="exercise-name" className="inline-block">
                     <Editable
@@ -90,8 +91,8 @@ export default function Exercise({ defaultExerciseName, defaultMax, defaultReps,
             {
                     active && (
                     <div className="bottom-prompt">
-                        <button onClick={handleUpdateExercise} className="btn">Confirm</button>
-                        <button onClick={handleCancel} className="btn">Cancel</button>
+                        <button onClick={handleUpdateExercise} className="btn"><FcCheckmark size={30} /></button>
+                        <button onClick={handleCancel} className="btn cancel"><FcCancel size={30} /></button>
                     </div>
                 )
             }
