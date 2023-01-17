@@ -91,7 +91,7 @@ export default function Exercise({ defaultExerciseName, defaultMax, defaultReps,
             {
                     active && (
                     <div className="bottom-prompt">
-                        <button onClick={handleUpdateExercise} className="btn"><FcCheckmark size={30} /></button>
+                        <button onClick={handleUpdateExercise} onTouchEnd={handleUpdateExercise} className="btn"><FcCheckmark size={30} /></button>
                         <button onClick={handleCancel} className="btn cancel"><FcCancel size={30} /></button>
                     </div>
                 )
