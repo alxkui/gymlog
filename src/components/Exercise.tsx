@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Editable from "./Editable";
 import { supabase } from '../../lib/supabaseClient';
-import { FcCheckmark, FcCancel } from 'react-icons/fc'
+import { FcCheckmark, FcCancel, FcEmptyTrash } from 'react-icons/fc'
+import Success from "./Success";
+import { useRouter } from "next/router";
 
 export default function Exercise({ defaultExerciseName, defaultMax, defaultReps, defaultSets, id }: any) {
 
@@ -11,6 +13,8 @@ export default function Exercise({ defaultExerciseName, defaultMax, defaultReps,
     const [max, setMax] = useState(defaultMax);
     const [reps, setReps] = useState(defaultReps);
     const [sets, setSets] = useState(defaultSets);
+    const [success, setSuccess] = useState("");
+    const router = useRouter();
 
     const handleOnExerciseNameChange = (e: any) => {
         setExerciseName((prev: string) => prev = e.target.value);
@@ -37,6 +41,18 @@ export default function Exercise({ defaultExerciseName, defaultMax, defaultReps,
         setActive(false);
     }
 
+    const handleDelete = async () => {
+        const { error } = await supabase.from("exercises").delete().eq('id', id);
+    
+        if(error) {
+            console.log(error);
+            return;
+        }
+
+        setSuccess(prev => prev = "Exercise Deleted!");
+        router.reload();
+    }
+
     const handleUpdateExercise = async () => {
         const { error } = await supabase.from("exercises").update({
             name: exerciseName,
@@ -45,14 +61,19 @@ export default function Exercise({ defaultExerciseName, defaultMax, defaultReps,
             max
         }).eq('id', id);
 
-        if(error) console.log(error);
+        if(error) {
+            console.log(error);
+            return;
+        }
 
         setActive(prev => prev = false);
-        console.log("Update sent!");
+        setSuccess(prev => prev = "Exercise Updated!");
+
     }
 
     return (
         <>
+        { success && <Success message={success} /> }
             <div
                 onFocus={handleFocusOnExercise}
                 onBlur={handleCancel}
@@ -93,6 +114,7 @@ export default function Exercise({ defaultExerciseName, defaultMax, defaultReps,
                     <div className="bottom-prompt">
                         <button onClick={handleUpdateExercise} onTouchEnd={handleUpdateExercise} className="btn"><FcCheckmark size={30} /></button>
                         <button onClick={handleCancel} className="btn cancel"><FcCancel size={30} /></button>
+                        <button onClick={handleDelete} className="btn cancel"><FcEmptyTrash size={30} /></button>
                     </div>
                 )
             }

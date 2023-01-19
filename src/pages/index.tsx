@@ -1,8 +1,10 @@
 import Exercise from '@/components/Exercise'
 import Head from 'next/head'
+import Link from 'next/link';
 import { supabase } from '../../lib/supabaseClient';
 
 function Home({ exercises }: any) {
+
   return (
     <>
       <Head>
@@ -15,7 +17,6 @@ function Home({ exercises }: any) {
         <link rel="apple-touch-icon" href="/favicon.png"></link>
       </Head>
       <main className="p-2">
-        <h1 className="text-5xl py-4 font-bold">Gym Log</h1>
         <div>
 
           <ul>
@@ -31,6 +32,9 @@ function Home({ exercises }: any) {
             ))}
           </ul>
 
+          <div>
+            <Link href="/add" className="exercise-add text-center">New</Link>
+          </div>
         </div>
       </main>
     </>
