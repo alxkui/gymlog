@@ -33,22 +33,25 @@ body {
 }
 
 .bottom-prompt {
-  position: fixed;
-  top: 0;
-  right: 0;
-  background: #313f4a;
+  background: #222222;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn {
   color: white;
   font-weight: bolder;
-  padding: 1.8em;
+  padding: 1.2em;
+  flex-grow: 1;
   background-color: rgb(10, 30, 10);
 }
 
 .btn.cancel {
+  background-color: rgb(92, 27, 7);
+}
+
+.btn.delete {
   background-color: rgb(56, 13, 0);
 }
 

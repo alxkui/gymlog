@@ -1,4 +1,5 @@
 import Exercise from '@/components/Exercise'
+import Log from '@/components/Log';
 import Head from 'next/head'
 import Link from 'next/link';
 import { supabase } from '../../lib/supabaseClient';
@@ -16,32 +17,19 @@ function Home({ exercises }: any) {
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/favicon.png"></link>
       </Head>
+
       <main className="p-2">
-        <div>
-
-          <ul>
-            {exercises.map((exercises: any) => (
-              <Exercise
-                key={exercises.id}
-                id={exercises.id}
-                defaultExerciseName={exercises.name}
-                defaultMax={exercises.max}
-                defaultReps={exercises.reps}
-                defaultSets={exercises.sets}
-              />
-            ))}
-          </ul>
-
-          <div>
+          <Log exercises={exercises} />
+          
+          <div className="buttons">
             <Link href="/add" className="exercise-add text-center">New</Link>
           </div>
-        </div>
       </main>
     </>
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   let { data } = await supabase.from('exercises').select()
 
   return {
