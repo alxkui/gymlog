@@ -29,7 +29,7 @@ function Home({ exercises }: any) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   let { data } = await supabase.from('exercises').select()
 
   return {
